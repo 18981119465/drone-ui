@@ -1,7 +1,7 @@
 <template>
   <div class="builds-feed-indicator" :class="{ [`status-${status}`]: true, filled }">
     <Hint v-if="mediaType === 'desktop'" position="bottom" showOn="hover" align="right" :offset="-45">
-      Recent builds ({{count}} active)
+      {{ $t("tips.recent_builds") }} ({{count}} {{ $t("tips.active")}})
     </Hint>
     <IconGear class="gear"/>
     <div class="circle"/>

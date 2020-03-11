@@ -5,7 +5,7 @@
 
     <div v-if="items.length === 0" class="empty">
       <slot name="empty"/>
-      {{ title }} list is empty.
+      {{ title }}{{ $t("messages.list_is_empty")}}.
     </div>
 
     <div v-for="item in items" :key="item.id" class="editable-list-item-wrapper">
@@ -39,7 +39,7 @@ export default {
     items: { type: Array, required: true },
     dispatchCreate: { type: Function, required: true },
     dispatchDelete: { type: Function, required: true },
-    itemCreateButtonTitle: { type: String, default: "Add" }
+    itemCreateButtonTitle: { type: String, default: () => this.$t("labels.add") },
   },
   data() {
     return {
@@ -53,7 +53,7 @@ export default {
       this.creating = true;
       this.dispatchCreate()
         .then(() => {
-          this.$store.dispatch("showNotification", { message: "Successfully saved" });
+          this.$store.dispatch("showNotification", { message: this.$t("messages.successfully_saved") });
           this.creating = false;
           this.error = null;
         })
@@ -66,7 +66,7 @@ export default {
       this.$set(this.deleting, item.id, true);
       this.dispatchDelete(item)
         .then(() => {
-          this.$store.dispatch("showNotification", { message: "Successfully deleted" });
+          this.$store.dispatch("showNotification", { message: this.$t("messages.successfully_deleted") });
           this.$delete(this.deleting, item.id);
           this.error = null;
         })

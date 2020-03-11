@@ -1,14 +1,14 @@
 <template>
   <div class="account">
     <header>
-      <h1>User Settings</h1>
+      <h1>{{ $t("headings.account_settings") }}</h1>
     </header>
 
     <Loading v-if="showLoading"/>
     <AlertError v-else-if="error" :error="error"/>
     <CardGroup v-else-if="user && user.token">
       <Card>
-        <h2 slot="header">Token</h2>
+        <h2 slot="header">{{ $t("labels.token") }}</h2>
 
         <CodeSnippetGroup>
           <CodeSnippet>

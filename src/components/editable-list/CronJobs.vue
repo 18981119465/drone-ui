@@ -1,11 +1,11 @@
 <template>
-  <EditableList title="Cron Jobs"
-                itemCreateButtonTitle="add a cron job"
+  <EditableList :title="$t('page_settings.cron_job.title')"
+                :itemCreateButtonTitle="$t('page_settings.cron_job.add_a_cron_job')"
                 :items="items"
                 :dispatchCreate="dispatchCreate"
                 :dispatchDelete="dispatchDelete">
     <IconCronJobsEmpty slot="empty"/>
-    <Help slot="help" title="Crons" href="https://docs.drone.io/configure/cron/">
+    <Help slot="help" :title="$t('page_settings.cron_job.title_show')" href="https://docs.drone.io/configure/cron/">
     Setup regularly schedule pipeline executions.
     </Help>
 
@@ -16,8 +16,8 @@
                       @delete="slotProps.onDelete"/>
 
     <template slot="fields">
-      <BaseInput placeholder="Cron Job Name" name="cron.name" v-model="cron.name" type="text"/>
-      <BaseInput :placeholder="`Cron Job Branch (default: ${defaultBranch})`"
+      <BaseInput :placeholder="$t('page_settings.cron_job.cron_job_name')" name="cron.name" v-model="cron.name" type="text"/>
+      <BaseInput :placeholder="$t('page_settings.cron_job.cron_job_branch') + ' (' + $t('page_settings.cron_job.default') + ': ' +defaultBranch + ')'"
                  name="cron.branch"
                  v-model="cron.branch"
                  type="text"/>
@@ -61,7 +61,7 @@ export default {
       return Object.values(crons || {});
     },
     cronExprOptions() {
-      return ["@hourly", "@daily", "@weekly", "@monthly", "@yearly"].map(x => [x, x]);
+      return ["@hourly", "@daily", "@weekly", "@monthly", "@yearly"].map(x => [x, this.$t('page_settings.cron_job.' + x.slice(1))]);
     }
   },
   methods: {

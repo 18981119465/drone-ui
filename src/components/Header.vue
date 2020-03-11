@@ -7,7 +7,7 @@
     </div>
 
     <Search v-if="userPresent && mediaType === 'desktop'"
-            placeholder="Search repositories or jump to …"/>
+            :placeholder="$t('headings.search_baseinput_placeholder')"/>
 
     <div class="status-bar" v-if="userPresent">
       <router-link v-if="mediaType !== 'desktop'"

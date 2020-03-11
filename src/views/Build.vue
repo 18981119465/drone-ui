@@ -5,7 +5,7 @@
     <portal v-if="buildShowState === 'data'" to="secondary-page-header-actions">
       <div class="header-actions">
         <Button outline class="button-source" :href="link" target="_blank">
-          <span>View source</span>
+          <span>{{ $t("labels.view_source") }}</span>
           <IconSource/>
         </Button>
 
@@ -13,16 +13,16 @@
                 class="button-restart"
                 @click.native="handleRestart"
                 :disabled="!isCollaborator">
-          <span>Restart</span>
+          <span>{{ $t("labels.restart") }}</span>
           <IconRestart/>
         </Button>
 
         <ButtonConfirm v-else outline
                        @click="handleCancel"
                        :disabled="!isCollaborator"
-                       :message="`Are you sure to cancel build #${build.number}?`"
+                       :message=" $t('page_build.message.are_you_sure_to_cancel_build') + `#${build.number}?`"
                        class="button-cancel">
-          <span>Cancel</span>
+          <span>{{ $t("labels.cancel") }}</span>
           <IconCancel/>
         </ButtonConfirm>
       </div>
@@ -40,7 +40,7 @@
     <AlertError v-if="buildShowState === 'loadingError'" :error="this.buildCollection.error"/>
     <Alert v-if="buildShowState === 'buildError'" theme="danger">{{ build.error }}</Alert>
 
-    <Loading v-if="buildShowState === 'data' && stagesShowState === 'loading'" text="Loading stages and steps"/>
+    <Loading v-if="buildShowState === 'data' && stagesShowState === 'loading'" :text="$t('page_build.message.loading_stages_and_steps')"/>
 
     <div class="build-content" v-if="buildShowState === 'data' && stagesShowState === 'data'">
       <div class="stages" ref="stages">

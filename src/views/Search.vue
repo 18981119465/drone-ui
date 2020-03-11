@@ -1,10 +1,10 @@
 <template>
   <div class="page-search">
     <BaseForm class="form">
-      <BaseInput ref="input" type="search" placeholder="Search repositories or jump to …" v-model="query"/>
+      <BaseInput ref="input" type="search" :placeholder="$t('headings.search_baseinput_placeholder')" v-model="query"/>
     </BaseForm>
 
-    <RepoList v-if="queryTrimmed" :items="results" emptyMessage="Repositories not found."/>
+    <RepoList v-if="queryTrimmed" :items="results" :emptyMessage="$t('messages.repository_not_found')"/>
   </div>
 </template>
 

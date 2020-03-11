@@ -2,7 +2,7 @@
   <div class="page-home">
     <PageHeader>
       <Breadcrumb>
-        <span>Repositories</span>
+        <span>{{ $t("labels.repositories") }}</span>
       </Breadcrumb>
 
       <div>
@@ -16,7 +16,7 @@
     <AlertError :error="loadingError || syncingError"/>
     <RepoList v-if="!loadingError"
               :items="sortLimit(latest)"
-              emptyMessage="Your repository list is empty."
+              emptyMessage="$t('messages.repository_list_is_empty')"
               :loading="showLoading"
               :repoToProps="repoToProps"/>
 

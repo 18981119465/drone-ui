@@ -7,7 +7,7 @@
         <slot></slot>
         <template v-if="href">
           <br/>
-          <a :href="href" class="link" target="_blank">View Documentation</a>
+          <a :href="href" class="link" target="_blank">{{ $t('labels.view_documentation') }}</a>
         </template>
       </div>
     </Popup>

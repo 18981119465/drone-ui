@@ -1,13 +1,13 @@
 <template>
-  <EditableList title="Secrets"
-                itemCreateButtonTitle="add a secret"
+  <EditableList :title="$t('page_settings.secrets.title')"
+                :itemCreateButtonTitle="$t('page_settings.secrets.add_secret')"
                 :items="items"
                 :dispatchCreate="dispatchCreate"
                 :dispatchDelete="dispatchDelete">
     <IconSecretsEmpty slot="empty"/>
 
-    <Help slot="help" title="Secrets" href="https://docs.drone.io/configure/secrets/">
-      To be used in pipeline steps
+    <Help slot="help" :title="$t('page_settings.secrets.title')" href="https://docs.drone.io/configure/secrets/">
+    {{ $t("page_settings.secrets.title_show")}}
     </Help>
 
     <EditableListItem slot="item" slot-scope="slotProps" :tags="tags(slotProps.item)"
@@ -16,9 +16,9 @@
                       @delete="slotProps.onDelete"/>
 
     <template slot="fields">
-      <BaseInput name="secret.name" v-model="secret.name" placeholder="Secret Name" type="text"/>
-      <BaseTextArea name="secret.data" v-model="secret.data" placeholder="Secret Value"/>
-      <BaseCheckbox v-model="secret.pullRequest" style="margin-bottom: 12px;">Allow Pull Requests</BaseCheckbox>
+      <BaseInput name="secret.name" v-model="secret.name" :placeholder="$t('page_settings.secrets.secret_name')" type="text"/>
+      <BaseTextArea name="secret.data" v-model="secret.data" :placeholder="$t('page_settings.secrets.secret_value')"/>
+      <BaseCheckbox v-model="secret.pullRequest" style="margin-bottom: 12px;">{{ $t("page_settings.secrets.allow_pull_request") }}</BaseCheckbox>
     </template>
   </EditableList>
 </template>

@@ -1,47 +1,47 @@
 <template>
   <CardGroup class="settings-view">
     <Card contentPadding="0 15px 15px" v-if="isAdmin">
-      <h2 slot="header">Main</h2>
+      <h2 slot="header">{{ $t("page_settings.main.title")}}</h2>
 
       <div class="control-group">
-        <label class="control-label">Project webhooks</label>
+        <label class="control-label">{{ $t("page_settings.main.project_webhooks") }}</label>
         <div class="controls">
-          <BaseCheckbox v-model="repo.ignore_pull_requests">Disable Pull Requests</BaseCheckbox>
-          <BaseCheckbox v-model="repo.ignore_forks">Disable Forks</BaseCheckbox>
+          <BaseCheckbox v-model="repo.ignore_pull_requests">{{ $t("page_settings.main.disable_pr") }}</BaseCheckbox>
+          <BaseCheckbox v-model="repo.ignore_forks">{{ $t("page_settings.main.disable_forks") }}</BaseCheckbox>
         </div>
       </div>
 
       <div class="control-group">
-        <label class="control-label">Project settings</label>
+        <label class="control-label">{{ $t("page_settings.main.project_settings") }}</label>
         <div class="controls">
-          <BaseCheckbox v-model="repo.protected">Protected</BaseCheckbox>
-          <BaseCheckbox v-model="repo.trusted" v-if="isRoot">Trusted</BaseCheckbox>
+          <BaseCheckbox v-model="repo.protected">{{ $t("page_settings.main.protected") }}</BaseCheckbox>
+          <BaseCheckbox v-model="repo.trusted" v-if="isRoot">{{ $t("page_settings.main.trusted") }}</BaseCheckbox>
         </div>
-        <Help title="Project settings">
+        <Help :title="$t('page_settings.main.project_settings')">
           <p class="help-p">
-            <a href="https://docs.drone.io/configure/signature/" target="_blank" class="link">Protected</a>
-            - If Enabled, blocks pipeline if the yaml signature cannot be verified.
+            <a href="https://docs.drone.io/configure/signature/" target="_blank" class="link">{{ $t("page_settings.main.protected") }}</a>
+            {{ $t("page_settings.main.protected_show") }}
           </p>
           <p class="help-p">
-            <a href="https://docker-runner.docs.drone.io/configuration/steps/#privileged-mode" target="_blank" class="link">Trusted</a>
-            - Enables privileged capabilities: an ability to start privileged containers and mount host machine volumes.
+            <a href="https://docker-runner.docs.drone.io/configuration/steps/#privileged-mode" target="_blank" class="link">{{ $t("page_settings.main.trusted") }}</a>
+            {{ $t("page_settings.main.trusted_show") }}
           </p>
         </Help>
       </div>
 
       <div class="control-group">
-        <label class="control-label">Project visibility</label>
+        <label class="control-label">{{ $t("page_settings.main.project_visibility") }}</label>
         <div class="controls">
           <BaseRadioButtons v-model="repo.visibility"
                             name="visibility"
-                            :options="{ public: 'Public', private: 'Private', internal: 'Internal'}"/>
+                            :options="{ public: $t('page_settings.main.public'), private: $t('page_settings.main.private'), internal: $t('page_settings.main.internal')}"/>
         </div>
         <!-- todo href for help -->
-        <Help title="Project visibility">Provides the repository visibility level.</Help>
+        <Help :title="$t('page_settings.main.project_visibility')">{{ $t('page_settings.main.project_visibility_show') }}</Help>
       </div>
 
       <div v-if="isRoot" class="control-group">
-        <label class="control-label">Timeout</label>
+        <label class="control-label">{{ $t("labels.timeout") }}</label>
         <div class="controls">
           <BaseSelect v-model="repo.timeout" :options="timeoutsOptions"/>
         </div>
@@ -50,7 +50,7 @@
       </div>
 
       <div class="control-group">
-        <label class="control-label">Configuration</label>
+        <label class="control-label">{{ $t("page_settings.main.configuration") }}</label>
         <div class="controls">
           <BaseInput v-model="repo.config_path"
                      autocomplete="off"
@@ -59,13 +59,13 @@
                      spellcheck="false"
                      type="text"/>
         </div>
-        <Help title="Configuration" href="https://docs.drone.io/configure/overview/">
-          The name of a file with the pipeline definition.
+        <Help :title="$t('page_settings.main.configuration')" href="https://docs.drone.io/configure/overview/">
+          {{ $t("page_settings.main.configuration_show")}}
         </Help>
       </div>
 
       <div class="control-actions">
-        <Button theme="primary" size="l" @click.native="save" :loading="saving">Save</Button>
+        <Button theme="primary" size="l" @click.native="save" :loading="saving">{{ $t("labels.save")}}</Button>
         <div class="error-message" v-if="error">{{ error.message }}</div>
       </div>
     </Card>
@@ -88,10 +88,10 @@
       <ButtonConfirm @click="disable"
                      theme="danger"
                      size="l"
-                     :message="`Are you sure to disable repository ${repo.slug}`">
-        Disable Repository
+                     :message="$t('page_settings.others.disable_repository_promote') + `${repo.slug}`">
+      {{ $t("page_settings.others.disable_repository") }}
       </ButtonConfirm>
-      <span>to stop processing builds.</span>
+      <span>{{ $t('page_settings.others.to_stop_proccessing_builds') }}</span>
     </div>
   </CardGroup>
 </template>
@@ -164,7 +164,7 @@ export default {
       this.$store
         .dispatch("updateRepo", { namespace, name, repo: updatedRepo })
         .then(() => {
-          this.$store.dispatch("showNotification", { message: "Successfully saved" });
+          this.$store.dispatch("showNotification", { message: this.$t('messages.successfully_saved') });
           this.error = null;
           this.saving = false;
         })

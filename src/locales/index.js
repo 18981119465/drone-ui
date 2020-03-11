@@ -1,10 +1,11 @@
 import en from "./en";
 import fr from "./fr";
+import zh from "./zh";
 
 /**
  * messages for all supported locales.
  */
-export const messages = { en, fr };
+export const messages = { en, fr, zh };
 
 /**
  * resolve returns the locale based on user preference, as
@@ -24,7 +25,7 @@ export const resolve = window => {
   }
   return (
     languages.find(function(language) {
-      return ["en"].find(supported => supported === language);
+      return ["en", "zh"].find(supported => supported === language);
     }) || "en"
   );
 };

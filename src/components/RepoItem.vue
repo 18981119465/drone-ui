@@ -38,15 +38,15 @@
 
         <div class="time">
           <div v-if="showElapsedTime" class="time-elapsed">
-            <Hint showOn="hover" align="center" position="bottom">Build duration</Hint>
+            <Hint showOn="hover" align="center" position="bottom">{{ $t("tips.build_duration") }}</Hint>
             <TimeElapsed :started="build.started" :stopped="build.finished"/>
           </div>
           <span v-if="showElapsedTime && build.created" class="dot"></span>
           <span v-if="build.created" class="time-started">
             <Hint showOn="hover" align="right" position="bottom">
-              Build started: {{ build.created | moment(MOMENT_FULL_FORMAT) }}
+              {{ $t("tips.build_started")}}: {{ build.created | moment(MOMENT_FULL_FORMAT) }}
             </Hint>
-            {{ new Date(build.created * 1000) | moment("from", "now") }}
+            {{ new Date(build.created * 1000) | moment("from", "now") }} 
           </span>
         </div>
       </div>

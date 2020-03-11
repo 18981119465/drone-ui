@@ -6,7 +6,7 @@
     <img class='avatar' :src="user.avatar" alt="avatar"/>
 
     <Popup :position="'bottom'" :align="'right'" :evict="!this.opened">
-      <router-link to="/account" @focus.native="open" @blur.native="closeDelayed">User settings</router-link>
+      <router-link to="/account" @focus.native="open" @blur.native="closeDelayed">{{ $t("headings.account_settings") }}</router-link>
       <a href="/logout" class="logout" @focus="open" @blur="closeDelayed">
         {{ $t("labels.logout") }}
       </a>

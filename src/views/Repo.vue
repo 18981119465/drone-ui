@@ -2,8 +2,8 @@
   <div class="repo">
     <PageHeader>
       <Breadcrumb>
-        <router-link v-if="userPresent" :to="'/'" class="link">Repositories</router-link>
-        <span v-else>Repositories</span>
+        <router-link v-if="userPresent" :to="'/'" class="link">{{ $t("labels.repositories") }}</router-link>
+        <span v-else>{{ $t("labels.repositories") }}</span>
 
         <router-link v-if="$route.params.build" :to="'/'+slug" class="link repo-name-breadcrumb" :title="slug">{{ slug }}</router-link>
         <span :title="slug" v-else>{{ slug }}</span>
@@ -13,7 +13,7 @@
     </PageHeader>
 
     <AlertError v-if="!repo" :error="error || null">
-      Repository Not Found.
+      {{ $t('messages.repository_not_found') }}.
     </AlertError>
 
     <Loading v-if="loading" text="Loading repository"/>
@@ -31,13 +31,13 @@
     <nav v-if="$route.params.build">
       <router-link :to="'/'+slug" class="manually-active">
         <IconArrow direction="left"/>
-        <span>Activity Feed</span>
+        <span>{{ $t("labels.activity_feed") }}</span>
       </router-link>
     </nav>
 
     <nav v-else-if="showTabs">
-      <router-link :to="'/'+slug" :disabled="!repo.active">Activity Feed</router-link>
-      <router-link :to="'/'+slug + '/settings'" v-if="showSettings">Settings</router-link>
+      <router-link :to="'/'+slug" :disabled="!repo.active">{{ $t("labels.activity_feed") }}</router-link>
+      <router-link :to="'/'+slug + '/settings'" v-if="showSettings">{{ $t("labels.settings") }}</router-link>
     </nav>
 
     <Alert v-if="repoEnablingErr && repoEnablingErr.status === 402">

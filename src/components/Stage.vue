@@ -4,7 +4,7 @@
       <Status :status="stage.status"/>
       <span :title="stage.name">{{ stage.name }}</span>
       <time-elapsed v-if="stage.started" :started="stage.started" :stopped="stage.stopped">
-        <Hint position="top" align="right" showOn="hover">Full stage duration</Hint>
+        <Hint position="top" align="right" showOn="hover">{{ $t("tips.full_stage_duration") }}</Hint>
       </time-elapsed>
       <IconArrowDropdown v-if="hasSteps" direction="down" class="arrow-dropdown"/>
     </header>

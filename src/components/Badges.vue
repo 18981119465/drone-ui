@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <h2 slot="header">Badges</h2>
+    <h2 slot="header">{{ $t('page_settings.badges.title') }}</h2>
     <img slot="header" :src="image" alt="badge"/>
 
     <div class="options">

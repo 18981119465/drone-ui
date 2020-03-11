@@ -12,7 +12,7 @@ export default {
   },
   props: {
     ...Button.props,
-    message: { type: String, default: "Are you sure?" }
+    message: { type: String, default: () => this.$t('labels.messages.are_you_sure') }
   },
   computed: {
     buttonProps() {

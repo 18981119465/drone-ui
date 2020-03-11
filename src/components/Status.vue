@@ -1,6 +1,6 @@
 <template>
   <div :class="{ status: true, [`status-${status}`]: true, [`theme-${theme}`]: true }">
-    <Hint showOn="hover" :offset="-7.5">{{ statusHumanized }}</Hint>
+    <Hint showOn="hover" :offset="-7.5">{{ $t("tips." + showStatus) }}</Hint>
 
     <Failure v-if="['failure', 'error'].includes(status)"/>
     <Cancelled v-else-if="['killed', 'skipped', 'declined'].includes(status)"/>
@@ -66,6 +66,9 @@ export default {
     Hint
   },
   computed: {
+    showStatus() {
+      return this.status;
+    },
     statusHumanized() {
       return humanizeStatus(this.status);
     },
